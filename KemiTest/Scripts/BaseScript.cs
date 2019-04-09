@@ -11,9 +11,11 @@ public class BaseScript : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-      red = GetNode("Red");
-      green = GetNode("Green");
-      GD.Print(GetNode("Red"));
+        Label n = new Label();
+        n.SetText("owo");
+        n.SetPosition(new Vector2(50,50));
+        AddChild(n);
+        
     }
 
  // Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -20,7 +20,9 @@ public class TekstFelt : LineEdit
     float time = 0;
     public override void _Process(float delta)
     {
-      
+      if (Input.IsKeyPressed((int)KeyList.Escape))
+      {
+          this.Dispose();
 
      /* if (Input.IsActionPressed("ui_change_text_one"))
       {
