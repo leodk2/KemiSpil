@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Scripts/BaseScript.cs" type="Script" id=1]
-[ext_resource path="res://ParentNodes/TekstFelt.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/MoleculeGenerator.cs" type="Script" id=1]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -12,5 +11,4 @@ margin_top = 553.0
 margin_right = 991.0
 margin_bottom = 587.0
 text = "OwO"
-script = ExtResource( 2 )
 

@@ -54,6 +54,7 @@
     <Compile Include="ParentNodes\TekstFelt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\BaseScript.cs" />
+    <Compile Include="Scripts\MoleculeGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

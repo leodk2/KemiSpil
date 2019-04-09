@@ -10,6 +10,10 @@ public class BaseScript : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        Label n = new Label();
+        n.SetText("owo");
+        n.SetPosition(new Vector2(50,50));
+        AddChild(n);
         
     }
 

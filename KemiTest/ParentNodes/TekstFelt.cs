@@ -23,7 +23,7 @@ public class TekstFelt : LineEdit
     float time = 0;
     public override void _Process(float delta)
     {
-      if (Keyboard.IsKeyToggled(Key.Escape))
+      if (Input.IsKeyPressed((int)KeyList.Escape))
       {
           this.Dispose();
 
