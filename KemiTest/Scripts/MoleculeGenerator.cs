@@ -1,9 +1,11 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+
 
 public class MoleculeGenerator : Node
 {
-    
+    string[] lengthNames = {"meth{0}", "eth{0}", "prop{0}", "but{0}", "pent{0}", "hex{0}", "hept{0}", "oct{0}", "non{0}", "dec{0}"};
     // height to draw molecule
     int drawHeight = 200;
     // current horizontal position
@@ -15,6 +17,7 @@ public class MoleculeGenerator : Node
     // spacing between lines when there are 2 or 3
     int multilineSpacing = 20;
 
+    
 
     // test input data
     int firstBond = 3;
@@ -23,6 +26,10 @@ public class MoleculeGenerator : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        Random r = new Random();
+        firstBond = r.Next(1,4);
+        CarbonCount = r.Next(1,11);
+        
         for (int i = 0; i < CarbonCount; i++)
         {
             if (i == 0)
@@ -102,8 +109,9 @@ public class MoleculeGenerator : Node
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    public override void _Process(float delta)
+    {
+        if (Input.IsKeyPressed((int)KeyList.Enter))
+            GetTree().ReloadCurrentScene();
+    }
 }
