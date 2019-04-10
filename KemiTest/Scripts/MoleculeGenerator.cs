@@ -16,13 +16,21 @@ public class MoleculeGenerator : Node
     int lineLength = 40;
     // spacing between lines when there are 2 or 3
     int multilineSpacing = 20;
-
-    
+    List<string> listOfStrings = new List<string>
+    {
+        "hej",
+        "med",
+        "dig",
+        "asbjoern",
+    };
+    public string MoleculeName { get; private set; }
 
     // test input data
     int firstBond = 3;
     int CarbonCount = 5;
 
+    Label label;
+    LineEdit lineEdit;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -30,12 +38,23 @@ public class MoleculeGenerator : Node
         firstBond = r.Next(1,4);
         CarbonCount = r.Next(1,11);
         
+        label = GetNode<Label>("Label");
+        lineEdit = GetNode<LineEdit>("TekstFelt");
+        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+
+        label.Text = listOfStrings[randomNumberGenerator.RandiRange(0, listOfStrings.Count)];
+
         for (int i = 0; i < CarbonCount; i++)
         {
             if (i == 0)
             {
                 GenerateLabel("CH" + (firstBond == 3 ? "" : (4-firstBond).ToString()));
                 GenerateLine(firstBond);
+                continue;
+            }
+            else if (i == CarbonCount-1)
+            {
+                GenerateLabel("CH3");
                 continue;
             }
             GenerateLabel("CH");
@@ -113,5 +132,9 @@ public class MoleculeGenerator : Node
     {
         if (Input.IsKeyPressed((int)KeyList.Enter))
             GetTree().ReloadCurrentScene();
+        if (lineEdit.Text == label.Text && Input.IsKeyPressed((int)KeyList.Enter)) 
+        {
+            label.Text = "Godt klaret";
+        }
     }
 }
