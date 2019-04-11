@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class MoleculeGenerator : Node
 {
+    #region GlobalVariables
+
     //Names of the molecules
     private List<string> lengthNames = new List<string> { "meth{0}", "eth{0}", "prop{0}", "but{0}", "pent{0}", "hex{0}", "hept{0}", "oct{0}", "non{0}", "dec{0}" };
 
@@ -33,6 +35,10 @@ public class MoleculeGenerator : Node
 
     private Label label;
     private LineEdit lineEdit;
+
+    #endregion GlobalVariables
+
+    #region GenerateMolecule
 
     public void GenerateLabel(string Text)
     {
@@ -89,7 +95,10 @@ public class MoleculeGenerator : Node
         }
     }
 
+    #endregion GenerateMolecule
+
     #region GodotNative
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -123,34 +132,36 @@ public class MoleculeGenerator : Node
             GenerateLine();
         }
     }
-    bool answered = false;
+
+    private bool answered = false;
+
     //  Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        if (Input.IsActionJustPressed("ui_select") && answered)
-        {
-            GetTree().ReloadCurrentScene();
-            answered = false;
-        }
         if ((lineEdit.Text.ToLower() == MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && !answered)
         {
             label.Text = "Godt klaret";
             answered = true;
-
         }
-        else if ((lineEdit.Text.ToLower() != MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && !answered) 
+        else if ((lineEdit.Text.ToLower() != MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && !answered)
         {
             label.Text = "Bedre held naeste gang";
             answered = true;
         }
 
+        //reloads the scene
+        if (Input.IsActionJustPressed("ui_select") && answered)
+        {
+            GetTree().ReloadCurrentScene();
+            answered = false;
+        }
 
-
-
+        //quits the game
         if (Input.IsKeyPressed((int)KeyList.Escape))
         {
             GetTree().Quit();
         }
     }
-    #endregion
+
+    #endregion GodotNative
 }
