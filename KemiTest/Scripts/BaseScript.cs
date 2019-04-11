@@ -23,12 +23,7 @@ public class BaseScript : Node2D
   {
       
   }
-  public override void _Draw()
-  {
-    
-    DrawLine(((Node2D)GetNode("Red")).Position, ((Node2D)GetNode("Green")).Position,new Color(0,0,0), 10, true);
-
-  }
+  
 
 
 }

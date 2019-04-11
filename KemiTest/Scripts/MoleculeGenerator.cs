@@ -43,9 +43,9 @@ public class MoleculeGenerator : Node
         label = GetNode<Label>("Label");
         lineEdit = GetNode<LineEdit>("TekstFelt");
 
-        MoleculeName = string.Format(lengthNames[r.Next(0, lengthNames.Length + 1)], suffixes[r.Next(0, suffixes.Length + 1)]);
+        //MoleculeName = string.Format(lengthNames[r.Next(0, lengthNames.Length + 1)], suffixes[r.Next(0, suffixes.Length + 1)]);
 
-        label.Text = MoleculeName.Capitalize();
+        //label.Text = MoleculeName.Capitalize();
 
         for (int i = 0; i < CarbonCount; i++)
         {
@@ -128,7 +128,7 @@ public class MoleculeGenerator : Node
         {
             GetTree().ReloadCurrentScene();
         }
-        if ((lineEdit.Text.ToLower() == MoleculeName.ToLower()) && Input.IsKeyPressed((int)KeyList.Enter))
+        if ((lineEdit.Text.ToLower() == label.Text) && Input.IsKeyPressed((int)KeyList.Enter))
         {
             label.Text = "Godt klaret";
         }
