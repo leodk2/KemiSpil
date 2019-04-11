@@ -1,0 +1,9 @@
+C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\bin\Debug\KemiTest.dll
+C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\bin\Debug\KemiTest.pdb
+C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\bin\Debug\System.ValueTuple.dll
+C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\bin\Debug\System.ValueTuple.xml
+C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Debug\KemiTest.csprojAssemblyReference.cache
+C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Debug\KemiTest.csproj.CoreCompileInputs.cache
+C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Debug\KemiTest.csproj.CopyComplete
+C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Debug\KemiTest.dll
+C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Debug\KemiTest.pdb

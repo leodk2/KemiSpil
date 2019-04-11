@@ -1,12 +1,13 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class MoleculeGenerator : Node
 {
     //Names of the molecules
-    private string[] lengthNames = { "meth{0}", "eth{0}", "prop{0}", "but{0}", "pent{0}", "hex{0}", "hept{0}", "oct{0}", "non{0}", "dec{0}" };
+    private List<string> lengthNames = new List<string> { "meth{0}", "eth{0}", "prop{0}", "but{0}", "pent{0}", "hex{0}", "hept{0}", "oct{0}", "non{0}", "dec{0}" };
 
-    private string[] suffixes = { "an", "en", "yl" };
+    private List<string> suffixes = new List<string> { "an", "en", "yl" };
 
     // height to draw molecule
     private int drawHeight = 200;
@@ -32,38 +33,6 @@ public class MoleculeGenerator : Node
 
     private Label label;
     private LineEdit lineEdit;
-
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        Random r = new Random();
-        firstBond = r.Next(1, 4);
-        CarbonCount = r.Next(1, 11);
-
-        label = GetNode<Label>("Label");
-        lineEdit = GetNode<LineEdit>("TekstFelt");
-
-        //MoleculeName = string.Format(lengthNames[r.Next(0, lengthNames.Length + 1)], suffixes[r.Next(0, suffixes.Length + 1)]);
-
-        //label.Text = MoleculeName.Capitalize();
-
-        for (int i = 0; i < CarbonCount; i++)
-        {
-            if (i == 0)
-            {
-                GenerateLabel("CH" + (firstBond == 3 ? "" : (4 - firstBond).ToString()));
-                GenerateLine(firstBond);
-                continue;
-            }
-            else if (i == CarbonCount - 1)
-            {
-                GenerateLabel("CH3");
-                continue;
-            }
-            GenerateLabel("CH");
-            GenerateLine();
-        }
-    }
 
     public void GenerateLabel(string Text)
     {
@@ -120,17 +89,68 @@ public class MoleculeGenerator : Node
         }
     }
 
+    #region GodotNative
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+    {
+        Random r = new Random();
+        firstBond = r.Next(1, 4);
+        CarbonCount = r.Next(1, 11);
+
+        label = GetNode<Label>("Label");
+        lineEdit = GetNode<LineEdit>("TekstFelt");
+        lineEdit.GrabFocus();
+        lineEdit.Text = "";
+        MoleculeName = lengthNames[r.Next(0, lengthNames.Count + 1)];
+        MoleculeName = String.Format(MoleculeName, suffixes[r.Next(0, suffixes.Count + 1)]);
+
+        label.Text = MoleculeName.Capitalize();
+
+        for (int i = 0; i < CarbonCount; i++)
+        {
+            if (i == 0)
+            {
+                GenerateLabel("CH" + (firstBond == 3 ? "" : (4 - firstBond).ToString()));
+                GenerateLine(firstBond);
+                continue;
+            }
+            else if (i == CarbonCount - 1)
+            {
+                GenerateLabel("CH3");
+                continue;
+            }
+            GenerateLabel("CH");
+            GenerateLine();
+        }
+    }
+    bool answered = false;
     //  Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        
-        if (Input.IsKeyPressed((int)KeyList.Space))
+        if (Input.IsActionJustPressed("ui_select") && answered)
         {
             GetTree().ReloadCurrentScene();
+            answered = false;
         }
-        if ((lineEdit.Text.ToLower() == label.Text) && Input.IsKeyPressed((int)KeyList.Enter))
+        if ((lineEdit.Text.ToLower() == MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && !answered)
         {
             label.Text = "Godt klaret";
+            answered = true;
+
+        }
+        else if ((lineEdit.Text.ToLower() != MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && !answered) 
+        {
+            label.Text = "Bedre held naeste gang";
+            answered = true;
+        }
+
+
+
+
+        if (Input.IsKeyPressed((int)KeyList.Escape))
+        {
+            GetTree().Quit();
         }
     }
+    #endregion
 }
