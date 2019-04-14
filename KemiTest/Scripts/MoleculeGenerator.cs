@@ -7,16 +7,16 @@ public class MoleculeGenerator : Node
     #region GlobalVariables
 
     //Names of the molecules
-    private List<string> lengthNames = new List<string> { "meth{0}", "eth{0}", "prop{0}", "but{0}", "pent{0}", "hex{0}", "hept{0}", "oct{0}", "non{0}", "dec{0}" };
+    private string[] lengthNames = { "meth{0}", "eth{0}", "prop{0}", "but{0}", "pent{0}", "hex{0}", "hept{0}", "oct{0}", "non{0}", "dec{0}" };
 
-    private List<string> suffixes = new List<string> { "an", "en", "yl" };
+    private string[] suffixes = { "an", "en", "yl" };
 
     // height to draw molecule
     private int drawHeight = 200;
 
     // current horizontal position
     private int horizontalPosition = 0;
-
+    
     // spacing between objects
     private int padding = 10;
 
@@ -102,6 +102,16 @@ public class MoleculeGenerator : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        CarbonChain c1 = new CarbonChain(1, 1, 2);
+        CarbonChain c2 = new CarbonChain(1, 1, 4);
+        CarbonChain c = new CarbonChain(6, 2, new List<CarbonChain>() { c1, c2 });
+        GD.Print(c.Name);
+
+        CarbonChain p1 = new CarbonChain(1, 1, 2);
+        CarbonChain p2 = new CarbonChain(2, 1, 3);
+        CarbonChain p = new CarbonChain(5, 3, new List<CarbonChain>() { p1, p2 });
+        GD.Print(p.Name);
+
         Random r = new Random();
         firstBond = r.Next(1, 4);
         CarbonCount = r.Next(1, 11);
@@ -110,8 +120,8 @@ public class MoleculeGenerator : Node
         lineEdit = GetNode<LineEdit>("TekstFelt");
         lineEdit.GrabFocus();
         lineEdit.Text = "";
-        MoleculeName = lengthNames[r.Next(0, lengthNames.Count + 1)];
-        MoleculeName = String.Format(MoleculeName, suffixes[r.Next(0, suffixes.Count + 1)]);
+        MoleculeName = lengthNames[r.Next(0, lengthNames.Length)];
+        MoleculeName = String.Format(MoleculeName, suffixes[r.Next(0, suffixes.Length)]);
 
         label.Text = MoleculeName.Capitalize();
 
