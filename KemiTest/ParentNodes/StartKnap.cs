@@ -20,7 +20,7 @@ public class StartKnap : Button
     //  }
     public override void _Pressed()
     {
-        GetTree().ChangeScene(@"res://ParentNodes/BaseNode.tscn");
+        GetTree().ChangeScene("res://ParentNodes/BaseNode.tscn");
         
     }
 }

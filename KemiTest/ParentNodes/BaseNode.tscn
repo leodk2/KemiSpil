@@ -21,3 +21,5 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 
+[node name="CarbonChainParent" type="Node2D" parent="."]
+

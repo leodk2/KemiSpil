@@ -19,3 +19,9 @@ C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Tools\KemiTest.
 C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Tools\KemiTest.csproj.CopyComplete
 C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Tools\KemiTest.dll
 C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Tools\KemiTest.pdb
+D:\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\bin\Tools\KemiTest.dll
+D:\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\bin\Tools\KemiTest.pdb
+D:\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Tools\KemiTest.csprojAssemblyReference.cache
+D:\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Tools\KemiTest.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Tools\KemiTest.dll
+D:\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Tools\KemiTest.pdb

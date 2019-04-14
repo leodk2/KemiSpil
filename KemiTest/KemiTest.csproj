@@ -59,6 +59,7 @@
     <Compile Include="ParentNodes\TekstFelt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\BaseScript.cs" />
+    <Compile Include="Scripts\CarbonChain.cs" />
     <Compile Include="Scripts\MoleculeGenerator.cs" />
     <Compile Include="StartMenu.cs" />
   </ItemGroup>
