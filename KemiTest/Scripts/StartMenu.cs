@@ -17,8 +17,11 @@ public class StartMenu : Control
     //  Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        
-        if (closeButton.IsPressed())
+        if (startButton.Pressed)
+        {
+            GetTree().ChangeScene("res://ParentNodes/StartMenu.tres");
+        }
+        else if (closeButton.IsPressed())
         {
             GetTree().Quit();
         }
