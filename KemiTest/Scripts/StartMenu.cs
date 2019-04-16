@@ -12,6 +12,10 @@ public class StartMenu : Control
     {
         startButton = GetNode<Button>("StartKnap");
         closeButton = GetNode<Button>("AfslutSpilKnap");
+        if (!System.IO.File.Exists(GenerateXml.Path))
+        {
+            
+        }
     }
 
     //  Called every frame. 'delta' is the elapsed time since the previous frame.

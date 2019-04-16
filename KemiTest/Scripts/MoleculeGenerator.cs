@@ -5,6 +5,14 @@ using System.Collections.Generic;
 public class MoleculeGenerator : Node
 {
     #region GlobalVariables
+    /// <summary>
+    /// This is a temporary way to set the score
+    /// </summary>
+    public int Score { get { return Score; } private set { Streak *= 10; } }
+    /// <summary>
+    /// This is just the number of correct answers in a row
+    /// </summary>
+    public int Streak { get; set; }
 
     //Names of the molecules
     private string[] lengthNames = { "meth{0}", "eth{0}", "prop{0}", "but{0}", "pent{0}", "hex{0}", "hept{0}", "oct{0}", "non{0}", "dec{0}" };
@@ -97,6 +105,7 @@ public class MoleculeGenerator : Node
 
     #endregion GenerateMolecule
 
+
     #region GodotNative
 
     // Called when the node enters the scene tree for the first time.
@@ -152,11 +161,13 @@ public class MoleculeGenerator : Node
         {
             label.Text = "Godt klaret";
             answered = true;
+            Streak++;
         }
         else if ((lineEdit.Text.ToLower() != MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && !answered)
         {
             label.Text = "Bedre held naeste gang";
             answered = true;
+            Streak = 0;
         }
 
         //reloads the scene
