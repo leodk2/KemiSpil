@@ -57,6 +57,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ParentNodes\Scoreboard.cs" />
     <Compile Include="Scripts\StartKnap.cs" />
     <Compile Include="Scripts\TekstFelt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

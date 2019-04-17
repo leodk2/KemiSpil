@@ -33,7 +33,7 @@ public class GenerateXml
     /// Reads from an xml file
     /// </summary>
     /// <param name="thingToGet">The thing you want to get from the file</param>
-    public static void ReadFromFile(string thingToGet)
+    public static IEnumerable<XElement> ReadFromFile(string thingToGet)
     {
         XDocument doc = XDocument.Load(Path);
         IEnumerable<XElement> query = from score in doc.Descendants("Username") orderby (int)score.Element(thingToGet) select score;
@@ -43,6 +43,6 @@ public class GenerateXml
             GD.Print(score.Name);
         }
         GD.Print("File read");
-
+        return query;
     }
 }
