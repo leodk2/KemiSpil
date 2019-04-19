@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Andre ting/StartMenu.tres" type="DynamicFont" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="SuddenDeath" type="Button" parent="."]
+margin_left = 57.1599
+margin_top = 120.68
+margin_right = 987.16
+margin_bottom = 246.68
+custom_fonts/font = ExtResource( 1 )
+text = "Single Life"
+
+[node name="SuddenDeath2" type="Button" parent="."]
+margin_left = 50.0
+margin_top = 272.065
+margin_right = 980.0
+margin_bottom = 400.065
+custom_fonts/font = ExtResource( 1 )
+text = "Time Trial"
+
+[node name="SuddenDeath3" type="Button" parent="."]
+margin_left = 50.0
+margin_top = 422.422
+margin_right = 980.0
+margin_bottom = 550.422
+custom_fonts/font = ExtResource( 1 )
+text = "Custom game?"
+

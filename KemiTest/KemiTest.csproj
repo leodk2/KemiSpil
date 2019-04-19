@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ParentNodes\Scoreboard.cs" />
+    <Compile Include="ParentNodes\SelectGame.cs" />
     <Compile Include="Scripts\StartKnap.cs" />
     <Compile Include="Scripts\TekstFelt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

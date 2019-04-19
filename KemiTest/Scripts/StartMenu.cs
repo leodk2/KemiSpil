@@ -2,19 +2,21 @@ using Godot;
 
 public class StartMenu : Control
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
     Button startButton;
     Button closeButton;
+    Button scoreButton;
+ 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         startButton = GetNode<Button>("StartKnap");
         closeButton = GetNode<Button>("AfslutSpilKnap");
-        if (!System.IO.File.Exists(GenerateXml.Path))
+        scoreButton = GetNode<Button>("OpenScoreboard");
+
+        
+        if (!System.IO.File.Exists(GenerateXml.FilePath))
         {
-            
+            GenerateXml.GenerateFile();
         }
     }
 
@@ -28,6 +30,10 @@ public class StartMenu : Control
         else if (closeButton.IsPressed())
         {
             GetTree().Quit();
+        }
+        else if (scoreButton.Pressed)
+        {
+            GetTree().ChangeScene("res://ParentNodes/Scoreboard.tscn");
         }
     }
 }

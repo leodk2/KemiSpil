@@ -14,10 +14,6 @@ public class Scoreboard : Node2D
     {
         list = GetNode<ItemList>("Table");
         list.MaxColumns++;
-        foreach (var item in collection)
-        {
-            
-        }
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -18,6 +18,14 @@ custom_fonts/font = ExtResource( 2 )
 text = "Start"
 script = ExtResource( 3 )
 
+[node name="OpenScoreboard" type="Button" parent="."]
+margin_left = 369.923
+margin_top = 317.643
+margin_right = 601.923
+margin_bottom = 424.643
+custom_fonts/font = ExtResource( 2 )
+text = "Åben scoreboard"
+
 [node name="Label" type="Label" parent="."]
 margin_left = 340.357
 margin_top = 87.9981
@@ -27,10 +35,10 @@ custom_fonts/font = ExtResource( 2 )
 text = "Organavn - remastered"
 
 [node name="AfslutSpilKnap" type="Button" parent="."]
-margin_left = 369.124
-margin_top = 311.006
-margin_right = 604.124
-margin_bottom = 422.006
+margin_left = 367.692
+margin_top = 455.635
+margin_right = 602.692
+margin_bottom = 566.635
 custom_fonts/font = ExtResource( 2 )
 text = "Afslut værktøj"
 
