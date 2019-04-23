@@ -5,17 +5,21 @@ using System.Collections.Generic;
 public class MoleculeGenerator : Node
 {
     #region GlobalVariables
+
     /// <summary>
     /// This is a temporary way to set the score
     /// </summary>
     public int Score { get { return Score; } private set { Streak *= 10; } }
+
     /// <summary>
     /// This is just the number of correct answers in a row
     /// </summary>
     public int Streak { get; set; }
 
+    private int time = 120;
+
     //Names of the molecules
-    private string[] lengthNames = { "meth{0}", "eth{0}", "prop{0}", "but{0}", "pent{0}", "hex{0}", "hept{0}", "oct{0}", "non{0}", "dec{0}" };
+    private string[] formats = { "meth{0}", "eth{0}", "prop{0}", "but{0}", "pent{0}", "hex{0}", "hept{0}", "oct{0}", "non{0}", "dec{0}" };
 
     private string[] suffixes = { "an", "en", "yl" };
 
@@ -24,7 +28,7 @@ public class MoleculeGenerator : Node
 
     // current horizontal position
     private int horizontalPosition = 0;
-    
+
     // spacing between objects
     private int padding = 10;
 
@@ -41,8 +45,11 @@ public class MoleculeGenerator : Node
 
     private int CarbonCount = 5;
 
-    private Label label;
+    private Label nameLabel;
     private LineEdit lineEdit;
+    private Timer Timer;
+    private Label TimerLabel;
+    private Node2D CarbonChainRoot;
 
     #endregion GlobalVariables
 
@@ -103,13 +110,10 @@ public class MoleculeGenerator : Node
         }
     }
 
-    #endregion GenerateMolecule
-
-
-    #region GodotNative
-
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
+    /// <summary>
+    /// Generates the carbon chains and names
+    /// </summary>
+    public void GenerateCarbonChains()
     {
         CarbonChain c1 = new CarbonChain(1, 1, 2);
         CarbonChain c2 = new CarbonChain(1, 1, 4);
@@ -125,14 +129,8 @@ public class MoleculeGenerator : Node
         firstBond = r.Next(1, 4);
         CarbonCount = r.Next(1, 11);
 
-        label = GetNode<Label>("Label");
-        lineEdit = GetNode<LineEdit>("TekstFelt");
-        lineEdit.GrabFocus();
-        lineEdit.Text = "";
-        MoleculeName = lengthNames[r.Next(0, lengthNames.Length)];
-        MoleculeName = String.Format(MoleculeName, suffixes[r.Next(0, suffixes.Length)]);
-
-        label.Text = MoleculeName.Capitalize();
+        MoleculeName = GenerateName(firstBond, CarbonCount);
+        nameLabel.Text = MoleculeName.Capitalize();
 
         for (int i = 0; i < CarbonCount; i++)
         {
@@ -152,20 +150,71 @@ public class MoleculeGenerator : Node
         }
     }
 
+    /// <summary>
+    /// Generates the name of the molecule
+    /// </summary>
+    /// <param name="firstbond"> the bonds in the first link</param>
+    /// <param name="carbonCount">the number of carbon atoms in the molecule</param>
+    /// <returns>the name of the molecule</returns>
+    private string GenerateName(int firstbond, int carbonCount) => string.Format(formats[carbonCount - 1], suffixes[firstbond - 1]);
+
+    private void ClearCarbonParent()
+    {
+        for (int i = 0; i < CarbonChainRoot.GetChildCount(); i++)
+        {
+            CarbonChainRoot.GetChild(i).Free();
+            CarbonChainRoot.RemoveChild(CarbonChainRoot.GetChild(i));
+        }
+    }
+
+    #endregion GenerateMolecule
+
+    #region GodotNative
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+    {
+        nameLabel = GetNode<Label>("NameLabel");
+        Timer = GetNode<Timer>("Timer");
+        TimerLabel = GetNode<Label>("TimerLabel");
+        lineEdit = GetNode<LineEdit>("TekstFelt");
+        CarbonChainRoot = GetNode<Node2D>("CarbonChainParent");
+        GD.Print(nameLabel.Text);
+
+        switch (SelectGame.Selection)
+        {
+            case 0:
+                TimerLabel.Hide();
+                break;
+
+            case 1:
+                Timer.SetWaitTime(time);
+
+                Timer.Start();
+                break;
+        }
+
+        lineEdit.GrabFocus();
+        lineEdit.Text = "";
+
+        GenerateCarbonChains();
+    }
+
     private bool answered = false;
 
     //  Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
+        TimerLabel.Text = Timer.WaitTime.ToString();
         if ((lineEdit.Text.ToLower() == MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && !answered)
         {
-            label.Text = "Godt klaret";
+            nameLabel.Text = "Godt klaret";
             answered = true;
             Streak++;
         }
         else if ((lineEdit.Text.ToLower() != MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && !answered)
         {
-            label.Text = "Bedre held naeste gang";
+            nameLabel.Text = "Bedre held naeste gang";
             answered = true;
             Streak = 0;
         }
@@ -173,7 +222,10 @@ public class MoleculeGenerator : Node
         //reloads the scene
         if (Input.IsActionJustPressed("ui_select") && answered)
         {
-            GetTree().ReloadCurrentScene();
+            ClearCarbonParent();
+            GenerateCarbonChains();
+            lineEdit.Text = "";
+            time += 30;
             answered = false;
         }
 

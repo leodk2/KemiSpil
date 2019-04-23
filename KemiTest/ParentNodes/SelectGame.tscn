@@ -1,32 +1,48 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Andre ting/StartMenu.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/SelectGame.cs" type="Script" id=1]
+[ext_resource path="res://Andre ting/StartMenu.tres" type="DynamicFont" id=2]
+[ext_resource path="res://BebasNeue-Regular.ttf" type="DynamicFontData" id=3]
+
+
+[sub_resource type="DynamicFont" id=1]
+size = 38
+font_data = ExtResource( 3 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 
 [node name="SuddenDeath" type="Button" parent="."]
 margin_left = 57.1599
-margin_top = 120.68
+margin_top = 26.1698
 margin_right = 987.16
-margin_bottom = 246.68
-custom_fonts/font = ExtResource( 1 )
+margin_bottom = 152.17
+custom_fonts/font = ExtResource( 2 )
 text = "Single Life"
 
-[node name="SuddenDeath2" type="Button" parent="."]
+[node name="TimeTrial" type="Button" parent="."]
 margin_left = 50.0
-margin_top = 272.065
+margin_top = 177.555
 margin_right = 980.0
-margin_bottom = 400.065
-custom_fonts/font = ExtResource( 1 )
+margin_bottom = 305.555
+custom_fonts/font = ExtResource( 2 )
 text = "Time Trial"
 
-[node name="SuddenDeath3" type="Button" parent="."]
+[node name="CustomGame" type="Button" parent="."]
 margin_left = 50.0
-margin_top = 422.422
+margin_top = 327.912
 margin_right = 980.0
-margin_bottom = 550.422
-custom_fonts/font = ExtResource( 1 )
+margin_bottom = 455.912
+custom_fonts/font = ExtResource( 2 )
 text = "Custom game?"
+
+[node name="CustomGame2" type="Button" parent="."]
+margin_left = 52.864
+margin_top = 511.119
+margin_right = 241.864
+margin_bottom = 564.119
+custom_fonts/font = SubResource( 1 )
+text = "Back"
 

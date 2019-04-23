@@ -57,8 +57,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ParentNodes\Scoreboard.cs" />
-    <Compile Include="ParentNodes\SelectGame.cs" />
+    <Compile Include="Scripts\Scoreboard.cs" />
+    <Compile Include="Scripts\SelectGame.cs" />
     <Compile Include="Scripts\StartKnap.cs" />
     <Compile Include="Scripts\TekstFelt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,6 +67,7 @@
     <Compile Include="Scripts\GenerateXml.cs" />
     <Compile Include="Scripts\MoleculeGenerator.cs" />
     <Compile Include="Scripts\StartMenu.cs" />
+    <Compile Include="Scripts\TimerLabel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ParentNodes\" />

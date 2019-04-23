@@ -2,10 +2,8 @@ using Godot;
 
 public class SelectGame : Control
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-    public int selection;
+   
+    public static int Selection { get; set; }
     Button singleLife;
     Button timeTrial;
     // Called when the node enters the scene tree for the first time.
@@ -18,14 +16,17 @@ public class SelectGame : Control
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-
+        
         if (singleLife.IsPressed())
         {
-
+            
+            Selection = 0;
+            GetTree().ChangeScene("res://ParentNodes/GameScene.tscn");
         }
         else if (timeTrial.IsPressed())
         {
-
+            Selection = 1;
+            GetTree().ChangeScene("res://ParentNodes/GameScene.tscn");
         }
 
     }

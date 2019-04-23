@@ -25,7 +25,7 @@ public class StartMenu : Control
     {
         if (startButton.Pressed)
         {
-            GetTree().ChangeScene("res://ParentNodes/StartMenu.tres");
+            GetTree().ChangeScene("res://ParentNodes/SelectGame.tscn");
         }
         else if (closeButton.IsPressed())
         {
