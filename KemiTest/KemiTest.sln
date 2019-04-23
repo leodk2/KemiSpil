@@ -1,12 +1,14 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KemiTest", "KemiTest.csproj", "{43500D4B-EEDA-43B6-A964-7D0C996A559B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-	Debug|Any CPU = Debug|Any CPU
-	Release|Any CPU = Release|Any CPU
-	Tools|Any CPU = Tools|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Tools|Any CPU = Tools|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{43500D4B-EEDA-43B6-A964-7D0C996A559B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -15,5 +17,11 @@ Global
 		{43500D4B-EEDA-43B6-A964-7D0C996A559B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{43500D4B-EEDA-43B6-A964-7D0C996A559B}.Tools|Any CPU.ActiveCfg = Tools|Any CPU
 		{43500D4B-EEDA-43B6-A964-7D0C996A559B}.Tools|Any CPU.Build.0 = Tools|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4EA66A9E-5E06-4D7E-BDC0-C9EA0C39DDBD}
 	EndGlobalSection
 EndGlobal
