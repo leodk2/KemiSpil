@@ -111,7 +111,7 @@ public class MoleculeGenerator : Node
         lineEdit.GrabFocus();
         lineEdit.Text = "";
         MoleculeName = lengthNames[r.Next(0, lengthNames.Count + 1)];
-        MoleculeName = String.Format(MoleculeName, suffixes[r.Next(0, suffixes.Count + 1)]);
+        MoleculeName = String.Format(MoleculeName, suffixes[r.Next(0, suffixes.Count)]);
 
         label.Text = MoleculeName.Capitalize();
 

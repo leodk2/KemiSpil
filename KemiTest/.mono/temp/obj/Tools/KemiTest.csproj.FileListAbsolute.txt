@@ -19,3 +19,5 @@ C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Tools\KemiTest.
 C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Tools\KemiTest.csproj.CopyComplete
 C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Tools\KemiTest.dll
 C:\Users\leomi\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Tools\KemiTest.pdb
+C:\Users\Asbjørn\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\bin\Tools\System.ValueTuple.xml
+C:\Users\Asbjørn\Documents\GitHub\KemiSpil\KemiTest\.mono\temp\obj\Tools\KemiTest.csproj.CopyComplete
