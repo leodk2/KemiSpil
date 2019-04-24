@@ -6,17 +6,7 @@ public class MoleculeGenerator : Node
 {
     #region GlobalVariables
 
-    /// <summary>
-    /// This is a temporary way to set the score
-    /// </summary>
-    public int Score { get { return Score; } private set { Streak *= 10; } }
-
-    /// <summary>
-    /// This is just the number of correct answers in a row
-    /// </summary>
-    public int Streak { get; set; }
-
-    private int time = 120;
+  
 
     //Names of the molecules
     private string[] formats = { "meth{0}", "eth{0}", "prop{0}", "but{0}", "pent{0}", "hex{0}", "hept{0}", "oct{0}", "non{0}", "dec{0}" };
@@ -46,7 +36,7 @@ public class MoleculeGenerator : Node
     private int CarbonCount = 5;
 
     private Label nameLabel;
-    private LineEdit lineEdit;
+    public  LineEdit lineEdit;
     private Timer Timer;
     private Label TimerLabel;
     private Node2D CarbonChainRoot;
@@ -158,12 +148,12 @@ public class MoleculeGenerator : Node
     /// <returns>the name of the molecule</returns>
     private string GenerateName(int firstbond, int carbonCount) => string.Format(formats[carbonCount - 1], suffixes[firstbond - 1]);
 
-    private void ClearCarbonParent()
+    public void ClearCarbonParent()
     {
-        for (int i = 0; i < CarbonChainRoot.GetChildCount(); i++)
+        for (int i = 0; i < GetChildCount(); i++)
         {
-            CarbonChainRoot.GetChild(i).Free();
-            CarbonChainRoot.RemoveChild(CarbonChainRoot.GetChild(i));
+            GetChild(i).Free();
+            RemoveChild(GetChild(i));
         }
     }
 
@@ -178,7 +168,7 @@ public class MoleculeGenerator : Node
         Timer = GetNode<Timer>("Timer");
         TimerLabel = GetNode<Label>("TimerLabel");
         lineEdit = GetNode<LineEdit>("TekstFelt");
-        CarbonChainRoot = GetNode<Node2D>("CarbonChainParent");
+//        CarbonChainRoot = GetNode<Node2D>("CarbonChainParent");
         GD.Print(nameLabel.Text);
 
         switch (SelectGame.Selection)
@@ -188,7 +178,7 @@ public class MoleculeGenerator : Node
                 break;
 
             case 1:
-                Timer.SetWaitTime(time);
+                Timer.SetWaitTime(GenerateXml.time);
 
                 Timer.Start();
                 break;
@@ -198,10 +188,13 @@ public class MoleculeGenerator : Node
         lineEdit.Text = "";
 
         GenerateCarbonChains();
+        GD.Print(GenerateXml.Streak);
+        GD.Print(GenerateXml.Streak*10);
     }
-
-    private bool answered = false;
-
+    
+    public bool answered = false;
+    public bool spacePressed = false;
+    
     //  Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
@@ -210,23 +203,24 @@ public class MoleculeGenerator : Node
         {
             nameLabel.Text = "Godt klaret";
             answered = true;
-            Streak++;
+            GenerateXml.Streak++;
         }
         else if ((lineEdit.Text.ToLower() != MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && !answered)
         {
             nameLabel.Text = "Bedre held naeste gang";
             answered = true;
-            Streak = 0;
+            GenerateXml.Streak = 0;
         }
 
         //reloads the scene
         if (Input.IsActionJustPressed("ui_select") && answered)
         {
-            ClearCarbonParent();
-            GenerateCarbonChains();
-            lineEdit.Text = "";
-            time += 30;
+            GD.Print(lineEdit.Text);
+            GenerateXml.time += 30;
             answered = false;
+            spacePressed = true;
+
+            GetTree().ReloadCurrentScene();
         }
 
         //quits the game

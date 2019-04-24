@@ -1,37 +1,42 @@
 using Godot;
-using System.Xml.Linq;
-using System.Linq;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Linq;
 
 public class GenerateXml
 {
     public static string UserName { get; set; }
-
+    public static int time = 120;
+    private static int score;
+    public static int Score { get { return score; } private set { score = Streak *= 10; } }
+    public static int Streak { get; set; }
     private static string filePath;
+
     /// <summary>
     /// This is the path to the file
     /// </summary>
-    public static string FilePath { get { return filePath; } private set { filePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments),"Score.score"); } } 
+    public static string FilePath { get { return filePath; } private set
+        { filePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "Score.score"); } }
 
     public static void GenerateFile()
     {
         //XElement score = new XElement("Username", new XAttribute("admin", false), userName);
-        
+
         XElement file = new XElement("Username", "", new XAttribute("Admin", false));
         Console.WriteLine(file);
         GD.Print(FilePath);
         try
         {
-        file.Save("Score.score");
-        GD.Print("File created and saved");
+            file.Save("Score.score");
+            GD.Print("File created and saved");
         }
         catch (Exception e)
         {
             GD.Print(e);
-            
         }
     }
+
     /// <summary>
     /// Writes a new score to the score file
     /// </summary>
@@ -44,6 +49,7 @@ public class GenerateXml
         doc.Save(FilePath);
         GD.Print("File edited and saved");
     }
+
     /// <summary>
     /// Reads from an xml file
     /// </summary>
