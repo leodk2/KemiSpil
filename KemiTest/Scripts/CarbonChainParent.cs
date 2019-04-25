@@ -13,12 +13,6 @@ public class CarbonChainParent : MoleculeGenerator
     }
     public override void _Process(float delta)
     {
-        if (base.spacePressed)
-        {
-            for (int i = 0; i < this.GetChildCount(); i++)
-            {
-                this.GetChild(i).Free();
-            }
-        }
+        
     }
 }

@@ -7,10 +7,7 @@ using System.Xml.Linq;
 public class GenerateXml
 {
     public static string UserName { get; set; }
-    public static int time = 120;
-    private static int score;
-    public static int Score { get { return score; } private set { score = Streak *= 10; } }
-    public static int Streak { get; set; }
+   
     private static string filePath;
 
     /// <summary>
@@ -65,5 +62,14 @@ public class GenerateXml
         }
         GD.Print("File read");
         return query;
+    }
+    public static void ReadAll()
+    {
+        XDocument doc = XDocument.Load(FilePath);
+        var query = from score in doc.Elements() select score;
+        foreach (var item in query)
+        {
+            GD.Print(item);
+        }
     }
 }

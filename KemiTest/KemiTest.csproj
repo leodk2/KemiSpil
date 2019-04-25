@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Scripts\CarbonChainParent.cs" />
+    <Compile Include="Scripts\EndScreen.cs" />
     <Compile Include="Scripts\Scoreboard.cs" />
     <Compile Include="Scripts\SelectGame.cs" />
     <Compile Include="Scripts\StartKnap.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Scripts\MoleculeGenerator.cs" />
     <Compile Include="Scripts\StartMenu.cs" />
     <Compile Include="Scripts\TimerLabel.cs" />
+    <Compile Include="Scripts\Paths.cs"/>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ParentNodes\" />

@@ -72,12 +72,4 @@ public struct CarbonChain
         PositionIndex = positionIndex;
         SubChains = null;
     }
-
-
-    /*
-    public CarbonChain(string name)
-    {
-
-    }
-    */
 }

@@ -6,8 +6,6 @@ public class MoleculeGenerator : Node
 {
     #region GlobalVariables
 
-  
-
     //Names of the molecules
     private string[] formats = { "meth{0}", "eth{0}", "prop{0}", "but{0}", "pent{0}", "hex{0}", "hept{0}", "oct{0}", "non{0}", "dec{0}" };
 
@@ -34,9 +32,10 @@ public class MoleculeGenerator : Node
     private int firstBond = 3;
 
     private int CarbonCount = 5;
+    private int score = 0;
 
     private Label nameLabel;
-    public  LineEdit lineEdit;
+    public LineEdit lineEdit;
     private Timer Timer;
     private Label TimerLabel;
     private Node2D CarbonChainRoot;
@@ -168,7 +167,6 @@ public class MoleculeGenerator : Node
         Timer = GetNode<Timer>("Timer");
         TimerLabel = GetNode<Label>("TimerLabel");
         lineEdit = GetNode<LineEdit>("TekstFelt");
-//        CarbonChainRoot = GetNode<Node2D>("CarbonChainParent");
         GD.Print(nameLabel.Text);
 
         switch (SelectGame.Selection)
@@ -178,9 +176,10 @@ public class MoleculeGenerator : Node
                 break;
 
             case 1:
-                Timer.SetWaitTime(GenerateXml.time);
-
+                Timer.SetWaitTime(GlobalVariables.time);
+                TimerLabel.Text = GlobalVariables.time.ToString();
                 Timer.Start();
+                IsTimerStarted = true;
                 break;
         }
 
@@ -188,45 +187,61 @@ public class MoleculeGenerator : Node
         lineEdit.Text = "";
 
         GenerateCarbonChains();
-        GD.Print(GenerateXml.Streak);
-        GD.Print(GenerateXml.Streak*10);
+        GD.Print(GlobalVariables.NewStreak);
+        GD.Print(GlobalVariables.NewStreak * 10);
     }
-    
-    public bool answered = false;
+
+    public bool IsTimerStarted = false;
+
+    /// <summary>
+    /// We change based on wether or not the user answered the question correctly
+    /// </summary>
+    public int answered = 0;
+
     public bool spacePressed = false;
-    
+
     //  Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
         TimerLabel.Text = Timer.WaitTime.ToString();
-        if ((lineEdit.Text.ToLower() == MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && !answered)
+        if ((lineEdit.Text.ToLower() == MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && answered == 0)
         {
             nameLabel.Text = "Godt klaret";
-            answered = true;
-            GenerateXml.Streak++;
+            answered = 1;
+            GlobalVariables.NewStreak++;
+            if (IsTimerStarted)
+            {
+                Timer.Stop();
+                GlobalVariables.time = Timer.TimeLeft;
+                //Lav en ordenlig måde at tage tid på
+            }
         }
-        else if ((lineEdit.Text.ToLower() != MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && !answered)
+        else if ((lineEdit.Text.ToLower() != MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && answered == 0 && !IsTimerStarted)
         {
             nameLabel.Text = "Bedre held naeste gang";
-            answered = true;
-            GenerateXml.Streak = 0;
+            answered = 2;
+            GenerateXml.WriteToFile(GlobalVariables.Score, GlobalVariables.NewStreak);
+            GlobalVariables.StreakList.Add(GlobalVariables.NewStreak);
+            GlobalVariables.NewStreak = 0;
         }
 
         //reloads the scene
-        if (Input.IsActionJustPressed("ui_select") && answered)
+        if (Input.IsActionJustPressed("ui_select") && answered==1)
         {
             GD.Print(lineEdit.Text);
-            GenerateXml.time += 30;
-            answered = false;
+            if (answered == 1)
+            {
+                GlobalVariables.time += 30;
+            }
+            answered = 0;
             spacePressed = true;
-
             GetTree().ReloadCurrentScene();
         }
 
-        //quits the game
+        //Changes the scene to the main menu
         if (Input.IsKeyPressed((int)KeyList.Escape))
         {
-            GetTree().Quit();
+            GetTree().ChangeScene(Paths.startMenu);
         }
     }
 
