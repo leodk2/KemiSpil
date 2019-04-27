@@ -7,14 +7,18 @@ using System.Xml.Linq;
 public class GenerateXml
 {
     public static string UserName { get; set; }
-   
+
     private static string filePath;
 
     /// <summary>
     /// This is the path to the file
     /// </summary>
-    public static string FilePath { get { return filePath; } private set
-        { filePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "Score.score"); } }
+    public static string FilePath
+    {
+        get { return filePath; }
+        private set
+        { filePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "Score.score"); }
+    }
 
     public static void GenerateFile()
     {
@@ -51,25 +55,33 @@ public class GenerateXml
     /// Reads from an xml file
     /// </summary>
     /// <param name="thingToGet">The thing you want to get from the file</param>
-    public static IEnumerable<XElement> ReadFromFile(string thingToGet)
+    public static List<XElement> ReadFromFile(string thingToGet, string orderBy)
     {
         XDocument doc = XDocument.Load(FilePath);
-        IEnumerable<XElement> query = from score in doc.Descendants("Username") orderby (int)score.Element(thingToGet) select score;
+        IEnumerable<XElement> query = null;
+        if (orderBy != null || orderBy != "")
+        {
+            query = from score in doc.Descendants("Username") orderby (int)score.Element(orderBy) select score;
+        }
         query.Reverse();
         foreach (var score in query)
         {
             GD.Print(score.Name);
         }
         GD.Print("File read");
-        return query;
+        return query.ToList();
     }
-    public static void ReadAll()
+
+    public static List<XElement> Read()
     {
         XDocument doc = XDocument.Load(FilePath);
         var query = from score in doc.Elements() select score;
+        List<ScoreStruct> scores = new List<ScoreStruct>();
         foreach (var item in query)
         {
-            GD.Print(item);
+            GD.Print(Convert.ToInt32(item.Element("Score").Value));
+            scores.Add(item.ToScoreStruct());
         }
+        return query.ToList();
     }
 }

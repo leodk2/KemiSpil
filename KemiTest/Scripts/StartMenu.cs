@@ -25,7 +25,8 @@ public class StartMenu : Control
     {
         if (startButton.Pressed)
         {
-            GetTree().ChangeScene("res://ParentNodes/SelectGame.tscn");
+            //selectgame scene
+            GetTree().ChangeScene(Paths.selectGame);
         }
         else if (closeButton.IsPressed())
         {
@@ -33,7 +34,8 @@ public class StartMenu : Control
         }
         else if (scoreButton.Pressed)
         {
-            GetTree().ChangeScene("res://ParentNodes/Scoreboard.tscn");
+            //Scoreboard scene
+            GetTree().ChangeScene(Paths.scoreBoard);
         }
     }
 }

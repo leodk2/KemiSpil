@@ -163,6 +163,7 @@ public class MoleculeGenerator : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        GD.Print(GenerateXml.FilePath);
         nameLabel = GetNode<Label>("NameLabel");
         Timer = GetNode<Timer>("Timer");
         TimerLabel = GetNode<Label>("TimerLabel");

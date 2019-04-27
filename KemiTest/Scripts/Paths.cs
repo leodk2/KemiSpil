@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 /// <summary>
 /// This is where we store all the scenes
@@ -22,12 +21,23 @@ public class GlobalVariables
     private static int score;
     public static int Score { get { return score; } private set { score = NewStreak *= 10; } }
     private static List<int> streakList;
-    public static List<int> StreakList { get
+
+    public static List<int> StreakList
+    {
+        get
         {
             StreakList.Sort();
             StreakList.Reverse();
             return StreakList;
+        }
+        set
+        {
+            GenerateXml.Read();
+            value.Sort();
+            value.Reverse();
+            streakList = value;
+        }
+    }
 
-        } set { value.Sort(); value.Reverse(); streakList = value; } }
     public static int NewStreak { get; set; }
 }
