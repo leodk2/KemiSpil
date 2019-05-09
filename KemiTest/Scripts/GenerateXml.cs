@@ -24,7 +24,7 @@ public class GenerateXml
     {
         //XElement score = new XElement("Username", new XAttribute("admin", false), userName);
 
-        XElement file = new XElement("Username", "", new XAttribute("Admin", false));
+        XElement file = new XElement("username", "", new XAttribute("Admin", false));
         Console.WriteLine(file);
         GD.Print(FilePath);
         try
@@ -43,25 +43,32 @@ public class GenerateXml
     /// </summary>
     /// <param name="score">The score to write. We need to figure out some way to calculate the score</param>
     /// <param name="streak">The longest streak. I'm not sure if we need this but we have it for now</param>
-    public static void WriteToFile(int score, int streak)
+    public static void WriteToFile(int streak, int score = 0)
     {
-        XDocument doc = XDocument.Load(FilePath);
-        doc.Root.Element("UserName").Add(new XElement("Score", score), new XElement("Streak", streak));
-        doc.Save(FilePath);
-        GD.Print("File edited and saved");
+        try
+        {
+            XElement doc = XElement.Load(FilePath);
+            doc.Element("userName").Add(new XElement("game", new XElement("score", score), new XElement("streak", streak)));
+            doc.Save(FilePath);
+            GD.Print("File edited and saved");
+        }
+        catch(Exception e)
+        {
+            GD.Print(e);
+        }
     }
 
     /// <summary>
-    /// Reads from an xml file
+    /// Reads from an xml file ordered by a certain paramater. we don't really need this right now.
     /// </summary>
     /// <param name="thingToGet">The thing you want to get from the file</param>
-    public static List<XElement> ReadFromFile(string thingToGet, string orderBy)
+    public static List<XElement> ReadFromFile(string orderBy)
     {
         XDocument doc = XDocument.Load(FilePath);
         IEnumerable<XElement> query = null;
         if (orderBy != null || orderBy != "")
         {
-            query = from score in doc.Descendants("Username") orderby (int)score.Element(orderBy) select score;
+            query = from score in doc.Descendants("username") orderby (int)score.Element(orderBy) select score;
         }
         query.Reverse();
         foreach (var score in query)
@@ -72,16 +79,16 @@ public class GenerateXml
         return query.ToList();
     }
 
-    public static List<XElement> Read()
+    public static List<ScoreStruct> Read()
     {
         XDocument doc = XDocument.Load(FilePath);
         var query = from score in doc.Elements() select score;
         List<ScoreStruct> scores = new List<ScoreStruct>();
         foreach (var item in query)
         {
-            GD.Print(Convert.ToInt32(item.Element("Score").Value));
+            GD.Print(Convert.ToInt32(item.Element("score").Value));
             scores.Add(item.ToScoreStruct());
         }
-        return query.ToList();
+        return scores;
     }
 }

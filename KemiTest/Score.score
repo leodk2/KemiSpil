@@ -1,2 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Username Admin="false"></Username>
+<Username Admin="false">
+    <game>
+        <score>50</score>
+        <streak>5</streak>
+    </game>
+
+
+
+
+</Username>

@@ -18,8 +18,7 @@ public class Paths
 public class GlobalVariables
 {
     public static float time = 120;
-    private static int score;
-    public static int Score { get { return score; } private set { score = NewStreak *= 10; } }
+    public int Score { get; set; }
     private static List<int> streakList;
 
     public static List<int> StreakList
@@ -39,5 +38,5 @@ public class GlobalVariables
         }
     }
 
-    public static int NewStreak { get; set; }
+    public int NewStreak { get; set; }
 }

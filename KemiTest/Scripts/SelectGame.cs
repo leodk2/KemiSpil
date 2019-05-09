@@ -21,12 +21,12 @@ public class SelectGame : Control
         {
             
             Selection = 0;
-            GetTree().ChangeScene("res://ParentNodes/GameScene.tscn");
+            GetTree().ChangeScene(Paths.gameScene);
         }
         else if (timeTrial.IsPressed())
         {
             Selection = 1;
-            GetTree().ChangeScene("res://ParentNodes/GameScene.tscn");
+            GetTree().ChangeScene(Paths.gameScene);
         }
 
     }

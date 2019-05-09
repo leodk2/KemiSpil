@@ -8,13 +8,15 @@ public class EndScreen : Node2D
     // private string b = "text";
     public Label scoreLabel;
     public Label streakLabel;
-
+    GlobalVariables var;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        var = new GlobalVariables();
+        GenerateXml.WriteToFile(var.NewStreak, var.Score);
         scoreLabel = GetNode<Label>("ScoreLabel");
         streakLabel = GetNode<Label>("StreakLabel");
-        scoreLabel.Text = GlobalVariables.Score.ToString();
+        scoreLabel.Text = var.Score.ToString();
         streakLabel.Text = GlobalVariables.StreakList.ToString();
     }
 

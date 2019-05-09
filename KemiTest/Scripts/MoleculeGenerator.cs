@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+
 public class MoleculeGenerator : Node
 {
     #region GlobalVariables
@@ -32,7 +33,7 @@ public class MoleculeGenerator : Node
     private int firstBond = 3;
 
     private int CarbonCount = 5;
-    private int score = 0;
+    private int score = 200;
 
     private Label nameLabel;
     public LineEdit lineEdit;
@@ -160,9 +161,12 @@ public class MoleculeGenerator : Node
 
     #region GodotNative
 
+    GlobalVariables variables;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        variables = new GlobalVariables();
         GD.Print(GenerateXml.FilePath);
         nameLabel = GetNode<Label>("NameLabel");
         Timer = GetNode<Timer>("Timer");
@@ -188,8 +192,10 @@ public class MoleculeGenerator : Node
         lineEdit.Text = "";
 
         GenerateCarbonChains();
-        GD.Print(GlobalVariables.NewStreak);
-        GD.Print(GlobalVariables.NewStreak * 10);
+        GD.Print(variables.NewStreak);
+
+        variables.Score *= 10;
+        GD.Print(variables.Score, " globalvariables");
     }
 
     public bool IsTimerStarted = false;
@@ -205,25 +211,35 @@ public class MoleculeGenerator : Node
     public override void _Process(float delta)
     {
         TimerLabel.Text = Timer.WaitTime.ToString();
+        //Right anwser
         if ((lineEdit.Text.ToLower() == MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && answered == 0)
         {
             nameLabel.Text = "Godt klaret";
             answered = 1;
-            GlobalVariables.NewStreak++;
+            variables.NewStreak++;
             if (IsTimerStarted)
             {
                 Timer.Stop();
                 GlobalVariables.time = Timer.TimeLeft;
-                //Lav en ordenlig måde at tage tid på
+                //Lav en ordenlig maade at tage tid paa
             }
         }
+        //Wrong anwser
         else if ((lineEdit.Text.ToLower() != MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && answered == 0 && !IsTimerStarted)
         {
             nameLabel.Text = "Bedre held naeste gang";
             answered = 2;
-            GenerateXml.WriteToFile(GlobalVariables.Score, GlobalVariables.NewStreak);
-            GlobalVariables.StreakList.Add(GlobalVariables.NewStreak);
-            GlobalVariables.NewStreak = 0;
+            /*if (variables.Score != 0)
+            {
+            }*/
+            variables.Score = 100;
+            GenerateXml.WriteToFile(score);
+            GlobalVariables.StreakList.Add(variables.NewStreak);
+            if (SelectGame.Selection == 0)
+            {
+                GetTree().ChangeScene(Paths.endScreen);
+            }
+            
         }
 
         //reloads the scene
@@ -237,6 +253,7 @@ public class MoleculeGenerator : Node
             answered = 0;
             spacePressed = true;
             GetTree().ReloadCurrentScene();
+
         }
 
         //Changes the scene to the main menu
