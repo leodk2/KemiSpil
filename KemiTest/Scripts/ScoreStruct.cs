@@ -15,7 +15,7 @@ public struct ScoreStruct
         Streak = streak;
     }
     
-    public ScoreStruct ConvertFromXml(XElement item)
+    public static ScoreStruct ConvertFromXml(XElement item)
     {
         return new ScoreStruct(Convert.ToInt32(item.Element("Score").Value), Convert.ToInt32(item.Element("Streak").Value));
     }

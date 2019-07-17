@@ -68,7 +68,7 @@
     <Compile Include="Scripts\BaseScript.cs" />
     <Compile Include="Scripts\CarbonChain.cs" />
     <Compile Include="Scripts\GenerateXml.cs" />
-    <Compile Include="Scripts\MoleculeGenerator.cs" />
+    <Compile Include="Scripts\GameScene.cs" />
     <Compile Include="Scripts\StartMenu.cs" />
     <Compile Include="Scripts\TimerLabel.cs" />
     <Compile Include="Scripts\Paths.cs" />

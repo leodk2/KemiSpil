@@ -1,11 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Username Admin="false">
-    <game>
-        <score>50</score>
-        <streak>5</streak>
-    </game>
-
-
-
-
-</Username>
+<username Admin="false" >
+    <score points="100" streak="10"/>
+    <score points="375" streak="3"> 
+</username>

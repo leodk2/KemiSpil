@@ -3,19 +3,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using static ScoreStruct;
+using System.IO;
+
 
 public class GenerateXml
 {
     public static string UserName { get; set; }
 
     private static string filePath;
+    public static List<ScoreStruct> Scores { get; set; }
 
     /// <summary>
     /// This is the path to the file
     /// </summary>
     public static string FilePath
     {
-        get { return filePath; }
+        get => filePath;
         private set
         { filePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "Score.score"); }
     }
@@ -79,16 +83,14 @@ public class GenerateXml
         return query.ToList();
     }
 
-    public static List<ScoreStruct> Read()
+    public static IEnumerable<ScoreStruct> Read()
     {
         XDocument doc = XDocument.Load(FilePath);
         var query = from score in doc.Elements() select score;
         List<ScoreStruct> scores = new List<ScoreStruct>();
         foreach (var item in query)
         {
-            GD.Print(Convert.ToInt32(item.Element("score").Value));
-            scores.Add(item.ToScoreStruct());
+            yield return ConvertFromXml(item);
         }
-        return scores;
     }
 }
