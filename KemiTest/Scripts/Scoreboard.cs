@@ -5,39 +5,42 @@ using System.Xml.Linq;
 
 public class Scoreboard : Node2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
+    
 
 
     ItemList list;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         list = GetNode<ItemList>("Table");
         list.MaxColumns++;
-        ReadXml();
+       // ReadXml();
     }
 
 
     public void ReadXml()
     {
-        XElement doc = XElement.Load("res://Score.score");
-        var query = from el in doc.Elements("game") select el;
-        
-        foreach (var item in query)
+        XElement doc;
+        try
         {
-            //prints for debugging purpuses
-            GD.Print(item.Element("score").Value);
-            GD.Print(item.Element("streak").Value);
-            //Adds the times to the table
-            list.AddItem(item.Element("score").Value);
-            list.AddItem(item.Element("streak").Value);
-            item.ToScoreStruct();
-
-            
+            doc = XElement.Load("res://Score.score");
+            var query = from el in doc.Elements("game") select el;
+            foreach (var item in query)
+            {
+                //prints for debugging purpuses
+                GD.Print(item.Element("score").Value);
+                GD.Print(item.Element("streak").Value);
+                //Adds the times to the table
+                list.AddItem(item.Element("score").Value);
+                list.AddItem(item.Element("streak").Value);
+                item.ToScoreStruct();            
+            }
         }
-
+        catch(Exception e)
+        {
+            GD.Print(e);
+        }
 
     }
 

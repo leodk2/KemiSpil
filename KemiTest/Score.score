@@ -1,5 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<username Admin="false" >
-    <score points="100" streak="10"/>
-    <score points="375" streak="3"> 
-</username>
+<username Admin="false"></username>

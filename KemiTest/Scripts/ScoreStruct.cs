@@ -2,12 +2,17 @@ using Godot;
 using System;
 using System.Xml.Linq;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
+[DataContract]
 public struct ScoreStruct
 {
-
+    [DataMember]
     public int Score { get; private set; }
+    [DataMember]
     public int Streak { get; private set; }
+    
+
 
     public ScoreStruct(int score, int streak)
     {

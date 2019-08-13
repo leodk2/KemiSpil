@@ -4,7 +4,6 @@
 [ext_resource path="res://Andre ting/StartMenu.tres" type="DynamicFont" id=2]
 [ext_resource path="res://BebasNeue-Regular.ttf" type="DynamicFontData" id=3]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 38
 font_data = ExtResource( 3 )
@@ -38,7 +37,7 @@ margin_bottom = 455.912
 custom_fonts/font = ExtResource( 2 )
 text = "Custom game?"
 
-[node name="CustomGame2" type="Button" parent="."]
+[node name="Back" type="Button" parent="."]
 margin_left = 52.864
 margin_top = 511.119
 margin_right = 241.864
