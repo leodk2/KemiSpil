@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using static ScoreStruct;
+using static Score;
 using System.IO;
 
 
@@ -12,7 +12,7 @@ public class GenerateXml
     public static string UserName { get; set; }
 
     private static string filePath;
-    public static List<ScoreStruct> Scores { get; set; }
+    public static List<Score> Scores { get; set; }
 
     /// <summary>
     /// This is the path to the file
@@ -83,11 +83,11 @@ public class GenerateXml
         return query.ToList();
     }
 
-    public static IEnumerable<ScoreStruct> Read()
+    public static IEnumerable<Score> Read()
     {
         XDocument doc = XDocument.Load(FilePath);
         var query = from score in doc.Elements() select score;
-        List<ScoreStruct> scores = new List<ScoreStruct>();
+        List<Score> scores = new List<Score>();
         foreach (var item in query)
         {
             yield return ConvertFromXml(item);

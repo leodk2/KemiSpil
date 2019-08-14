@@ -1,5 +1,10 @@
 using Godot;
 using System;
+using System.Runtime.Serialization.Json;
+using System.IO;
+using System.Collections.Generic;
+
+
 
 public class EndScreen : Node2D
 {
@@ -14,6 +19,9 @@ public class EndScreen : Node2D
     {
         var = new GlobalVariables();
         GenerateXml.WriteToFile(var.NewStreak, var.Score);
+        JsonParser.Serializer = new DataContractJsonSerializer(typeof(List<Score>));
+        JsonParser.Stream = new MemoryStream();
+        
         scoreLabel = GetNode<Label>("ScoreLabel");
         streakLabel = GetNode<Label>("StreakLabel");
         scoreLabel.Text = var.Score.ToString();

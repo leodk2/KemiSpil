@@ -21,6 +21,9 @@ public class GlobalVariables
     public int Score { get; set; }
     private static List<int> streakList;
 
+    public List<Score> Scores { get; private set; } = new List<Score>();
+
+
     public static List<int> StreakList
     {
         get

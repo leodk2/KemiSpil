@@ -2,19 +2,21 @@ using Godot;
 using System;
 using System.Linq;
 using System.Xml.Linq;
+using System.Collections.Generic;
 
 public class Scoreboard : Node2D
 {
-    
 
 
-    ItemList list;
+    GridContainer container;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        list = GetNode<ItemList>("Table");
-        list.MaxColumns++;
+        
+        container = GetNode<GridContainer>("GridContainer");
+        container.AddChild(new Label());
+        JsonParser.DeserializeJsonFile(JsonParser.Path);
        // ReadXml();
     }
 
@@ -32,9 +34,10 @@ public class Scoreboard : Node2D
                 GD.Print(item.Element("score").Value);
                 GD.Print(item.Element("streak").Value);
                 //Adds the times to the table
-                list.AddItem(item.Element("score").Value);
-                list.AddItem(item.Element("streak").Value);
-                item.ToScoreStruct();            
+                
+                //list.AddItem(item.Element("score").Value);
+                //list.AddItem(item.Element("streak").Value);
+                //item.ToScoreStruct();            
             }
         }
         catch(Exception e)

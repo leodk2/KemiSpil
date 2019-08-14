@@ -58,7 +58,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Scripts\ScoreStruct.cs" />
+    <Compile Include="ParentNodes\GridContainer.cs" />
+    <Compile Include="Scripts\Score.cs" />
     <Compile Include="Scripts\CarbonChainParent.cs" />
     <Compile Include="Scripts\EndScreen.cs" />
     <Compile Include="Scripts\Scoreboard.cs" />
@@ -73,7 +74,8 @@
     <Compile Include="Scripts\StartMenu.cs" />
     <Compile Include="Scripts\TimerLabel.cs" />
     <Compile Include="Scripts\Paths.cs" />
-    <Compile Include="Scripts\JsonParser.cs"/>
+    <Compile Include="Scripts\JsonParser.cs" />
+    <Compile Include="Scripts\GameType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ParentNodes\" />

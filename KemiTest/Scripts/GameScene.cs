@@ -41,6 +41,9 @@ public class MoleculeGenerator : Node
     private Label TimerLabel;
     private Node2D CarbonChainRoot;
 
+    public int scorePoints = 0;
+    public int streak = 0;
+    public const int addPoints = 100;
     #endregion GlobalVariables
 
     #region GenerateMolecule
@@ -176,11 +179,11 @@ public class MoleculeGenerator : Node
 
         switch (SelectGame.Selection)
         {
-            case 0:
+            case GameType.SingleLife:
                 TimerLabel.Hide();
                 break;
 
-            case 1:
+            case GameType.TimeTrail:
                 Timer.SetWaitTime(GlobalVariables.time);
                 TimerLabel.Text = GlobalVariables.time.ToString();
                 Timer.Start();
@@ -215,8 +218,8 @@ public class MoleculeGenerator : Node
         if ((lineEdit.Text.ToLower() == MoleculeName) && Input.IsKeyPressed((int)KeyList.Enter) && answered == 0)
         {
             nameLabel.Text = "Godt klaret";
-            answered = 1;
-            variables.NewStreak++;
+            scorePoints += addPoints;
+            streak++;
             if (IsTimerStarted)
             {
                 Timer.Stop();
@@ -233,7 +236,7 @@ public class MoleculeGenerator : Node
             {
             }*/
             variables.Score = 100;
-            GenerateXml.WriteToFile(score);
+            variables.Scores.Add(new Score(scorePoints, streak));
             GlobalVariables.StreakList.Add(variables.NewStreak);
             if (SelectGame.Selection == 0)
             {

@@ -13,11 +13,7 @@ public class StartMenu : Control
         closeButton = GetNode<Button>("AfslutSpilKnap");
         scoreButton = GetNode<Button>("OpenScoreboard");
 
-        
-        if (!System.IO.File.Exists(GenerateXml.FilePath))
-        {
-            GenerateXml.GenerateFile();
-        }
+        JsonParser.CreateFile();
     }
 
     //  Called every frame. 'delta' is the elapsed time since the previous frame.
