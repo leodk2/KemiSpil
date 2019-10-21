@@ -12,7 +12,7 @@ public class StartMenu : Control
         startButton = GetNode<Button>("StartKnap");
         closeButton = GetNode<Button>("AfslutSpilKnap");
         scoreButton = GetNode<Button>("OpenScoreboard");
-
+        GD.Print(new Score(100, 1).ToString());
         JsonParser.CreateFile();
     }
 

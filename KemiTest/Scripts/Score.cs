@@ -32,7 +32,10 @@ public class Score
         }
     }
 
-    
+    public override string ToString(){
+        return $"points: {this.Points}, streak: {this.Streak}";
+    }
+
     public static Score ConvertFromXml(XElement item)
     {
         return new Score(Convert.ToInt32(item.Element("Score").Value), Convert.ToInt32(item.Element("Streak").Value));

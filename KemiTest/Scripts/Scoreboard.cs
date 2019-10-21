@@ -4,18 +4,18 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Collections.Generic;
 
-public class Scoreboard : Node2D
+public class Scoreboard : Godot.GridContainer
 {
 
 
     GridContainer container;
-
+    ItemList list;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        
+     
         container = GetNode<GridContainer>("GridContainer");
-        container.AddChild(new Label());
+        container.AddChild(new Label(){Text="hej"});
         JsonParser.DeserializeJsonFile(JsonParser.Path);
        // ReadXml();
     }

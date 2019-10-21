@@ -13,8 +13,7 @@ public class BaseScript : Node2D
         Label n = new Label();
         n.SetText("owo");
         n.SetPosition(new Vector2(50,50));
-        AddChild(n);
-        
+        AddChild(n);        
     }
 
  // Called every frame. 'delta' is the elapsed time since the previous frame.
